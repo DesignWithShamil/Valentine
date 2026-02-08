@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
 <title>Valentine Proposal Generator</title>
 <style>
   * {
@@ -36,6 +37,8 @@
     width: 100%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
 
   .card:hover {
@@ -122,35 +125,6 @@
 
   .phone-input input {
     border-radius: 0 10px 10px 0;
-  }
-
-  .image-upload-container {
-    border: 2px dashed #ff99cc;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .image-upload-container:hover {
-    background: rgba(255, 204, 224, 0.1);
-  }
-
-  .upload-icon {
-    font-size: 3rem;
-    color: #ff3366;
-    margin-bottom: 10px;
-  }
-
-  .uploaded-image {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 10px;
-    margin-top: 15px;
-    display: none;
-    border: 3px solid #ff99cc;
   }
 
   .btn {
@@ -240,6 +214,8 @@
     color: white;
     padding: 15px 40px;
     font-size: 1.3rem;
+    z-index: 10;
+    position: relative;
   }
 
   .btn-yes:hover {
@@ -252,6 +228,8 @@
     color: white;
     padding: 15px 40px;
     font-size: 1.3rem;
+    z-index: 10;
+    position: relative;
   }
 
   .btn-no:hover {
@@ -306,70 +284,11 @@
     border-top: 2px solid #ff99cc;
   }
 
-  .items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-  }
-
-  .item-card {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-  }
-
-  .item-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .item-icon {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-
   .timestamp {
     font-size: 0.9rem;
     color: #777;
     text-align: center;
     margin-top: 20px;
-  }
-
-  #resultImage {
-    max-width: 250px;
-    max-height: 250px;
-    border-radius: 15px;
-    margin: 20px auto;
-    display: block;
-    border: 4px solid #ff99cc;
-  }
-
-  .amount-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .amount-section {
-    background: #fff5f8;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .amount-display {
-    font-size: 1.8rem;
-    color: #ff3366;
-    font-weight: bold;
-    text-align: center;
-    margin: 15px 0;
-    padding: 10px;
-    background: white;
-    border-radius: 10px;
-    border: 2px solid #ffcce0;
   }
 
   .cute-sentence {
@@ -384,43 +303,6 @@
     border: 2px dashed #ff99cc;
   }
 
-  .couple-image {
-    max-width: 250px;
-    max-height: 250px;
-    border-radius: 15px;
-    margin: 20px auto;
-    display: block;
-    border: 4px solid #ff99cc;
-    box-shadow: 0 5px 15px rgba(255, 51, 102, 0.2);
-  }
-
-  .upload-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .upload-label span {
-    background: #ff3366;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-  }
-
-  .payment-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-
   .gap-message {
     color: #ff3366;
     text-align: center;
@@ -430,17 +312,125 @@
     border-radius: 10px;
     font-weight: bold;
   }
+
+  /* Cat Animation Styles */
+  .cat-animation {
+    position: absolute;
+    font-size: 4rem;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    z-index: 1;
+  }
+
+  .kissing-cats {
+    animation-name: kissAnimation;
+    font-size: 5rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .smiling-cat {
+    animation-name: smileAnimation;
+    font-size: 6rem;
+    top: 20px;
+    right: 20px;
+  }
+
+  .proposal-cats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+
+  .proposal-cat {
+    font-size: 6rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .proposal-cat:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .proposal-cat:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  .proposal-cat:nth-child(4) {
+    animation-delay: 1.5s;
+  }
+
+  .proposal-cat:nth-child(5) {
+    animation-delay: 2s;
+  }
+
+  /* Keyframes for animations */
+  @keyframes kissAnimation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+  }
+
+  @keyframes smileAnimation {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .heart-beat {
+    animation: heartBeat 1s infinite;
+    color: #ff3366;
+  }
+
+  .proposal-question {
+    font-size: 2rem;
+    margin: 30px 0;
+    animation: heartBeat 2s infinite;
+    color: #ff3366;
+    text-shadow: 2px 2px 4px rgba(255, 51, 102, 0.2);
+  }
+
+  .love-cats {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .love-cat {
+    font-size: 4rem;
+    animation: float 2s ease-in-out infinite;
+  }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- First Page: Link Generator -->
+  <!-- Generator Page -->
   <div class="card" id="generatorPage">
     <div class="header-section">
       <h1>💝 Valentine Proposal Generator</h1>
-      <p>Create a magical Valentine's Day proposal with personalized amounts and images!</p>
-      <p class="creator-note">Created by Foumi, Devbies</p>
+      <p>Create a magical Valentine's Day proposal with personalized amounts!</p>
+      <p class="creator-note">Made with 💖 maghaari._</p>
     </div>
 
     <div class="form-group">
@@ -461,57 +451,14 @@
       </div>
     </div>
 
-    <!-- First Amount & Image -->
-    <div class="amount-section">
-      <h3>💝 First Amount & Image (For "No" option)</h3>
-      
-      <div class="form-group">
-        <label class="upload-label">
-          <span>1</span> First Amount (If they say No):
-        </label>
-        <input type="number" id="amount1" placeholder="Enter amount for No option" max="99999" min="1">
-        <div class="amount-display hidden" id="amountDisplay1">₹0</div>
-      </div>
-    </div>
-
-    <!-- Second Amount & Images -->
-    <div class="amount-section">
-      <h3>💖 Second Amount & Images (For "Yes" option)</h3>
-      
-      <div class="form-group">
-        <label class="upload-label">
-          <span>2</span> Second Amount (If they say Yes):
-        </label>
-        <input type="number" id="amount2" placeholder="Enter amount for Yes option" max="99999" min="1">
-        <div class="amount-display hidden" id="amountDisplay2">₹0</div>
-      </div>
-    </div>
-
-    <!-- Image Uploads -->
     <div class="form-group">
-      <label class="upload-label">
-        <span>📷</span> Upload Couple Image:
-      </label>
-      <div class="image-upload-container" id="imageUploadContainer1">
-        <div class="upload-icon">💑</div>
-        <p>Upload a cute couple image</p>
-        <p><small>Will be shown in the proposal</small></p>
-        <input type="file" id="imageInput1" accept="image/*" style="display: none;">
-        <img id="uploadedImagePreview1" class="uploaded-image" alt="Couple Image">
-      </div>
+      <label>💔 Amount if they say No:</label>
+      <input type="number" id="amount1" placeholder="Enter amount for No option" max="99999" min="1">
     </div>
 
     <div class="form-group">
-      <label class="upload-label">
-        <span>📷</span> gp scanner Image:
-      </label>
-      <div class="image-upload-container" id="imageUploadContainer2">
-        <div class="upload-icon">🎉</div>
-        <p>gp scanner</p>
-        <p><small>Will be shown after Yes</small></p>
-        <input type="file" id="imageInput2" accept="image/*" style="display: none;">
-        <img id="uploadedImagePreview2" class="uploaded-image" alt="Celebration Image">
-      </div>
+      <label>💖 Amount if they say Yes:</label>
+      <input type="number" id="amount2" placeholder="Enter amount for Yes option" max="99999" min="1">
     </div>
 
     <button class="btn btn-primary" onclick="generateLink()">✨ Generate Valentine Link</button>
@@ -519,7 +466,7 @@
     <div id="linkSection" class="hidden">
       <h3>Your Valentine Link is Ready! 💝</h3>
       <div class="link-container">
-        <p class="link-url" id="generatedLink">https://devbies.github.io/My-Valentine/?from=user&to=valentine</p>
+        <p class="link-url" id="generatedLink"></p>
       </div>
       <button class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
       <button class="btn btn-primary" onclick="openProposal()">Open Proposal Page</button>
@@ -529,36 +476,55 @@
   <!-- Proposal Page -->
   <div class="card hidden" id="proposalPage">
     <div class="header-section">
-      <h2 id="proposalQuestion">My Love, will you be my Valentine?</h2>
-      
+      <h2>Will you be my Valentine?</h2>
+      <div class="proposal-cats">
+       <div style="width:80%; overflow:hidden; border-radius:16px;">
+  <img src="proposal.jpg" style="width:100%; height:auto;" />
+</div>
+
+
+       <div class="proposal-cat">😽</div>
+        <div class="love-cat">💖</div>
+        <div class="proposal-cat">🐱</div>
+      </div>
+      <div class="proposal-question" id="proposalQuestion">
+        Do you mew my Valentine? 😻
+      </div>
       <div class="cute-sentence">
         "Every love story is beautiful, but ours is my favorite. 💖"
       </div>
-      
-      <div id="proposalImageContainer"></div>
     </div>
 
     <div class="options">
-      <button class="btn btn-yes" onclick="handleYes()">Yes! 💖 Forever!</button>
-      <button class="btn btn-no" onclick="handleNo()" id="noButton">No 😔 Maybe Later</button>
+      <button class="btn btn-yes" onclick="handleYes()">Yes! 😻 Purr-fect!</button>
+      <button class="btn btn-no" onclick="handleNo()" id="noButton">No 😾 Maybe Later</button>
     </div>
-
-    <a href="https://www.instagram.com/5hxml._/" target="_blank">
-      <p class="creator-note">Made with 💖 by shamil</p>
+    <a href="https://www.instagram.com/maghaari._/" target="_blank">
+      <p class="creator-note">Made with 💖 by maghaari</p>
     </a>
-
-    <p id="noHint" class="hidden" style="color: #ff9933; font-style: italic;">Think about it... Our love story is just beginning! 💕</p>
+    <p id="noHint" class="hidden" style="color: #ff9933; font-style: italic; text-align:center;">
+      Think about it... Our love story is just beginning! 💕
+    </p>
   </div>
 
   <!-- Yes Result Page -->
   <div class="card hidden" id="yesResultPage">
     <div class="header-section">
       <h2>🎉 Yay! You Said YES! 💖</h2>
-      <img id="yesResultImage" class="couple-image" alt="Celebration Image">
       <div class="cute-sentence">
         "Love is not about how many days, weeks or months you've been together, it's all about how much you love each other every day."
       </div>
     </div>
+
+    <div class="love-cats">
+      <div class="love-cat">😻</div>
+      <div class="love-cat">💕</div>
+      <div class="love-cat">😽</div>
+    </div>
+    <div style="width:100%; overflow:hidden; border-radius:16px;">
+  <img src="proposal.jpg" style="width:100%; height:auto;" />
+</div>
+
 
     <div class="bill-section">
       <h3>💝 Pay the upcoming bills alsoo</h3>
@@ -581,7 +547,7 @@
 
     <div class="timestamp">
       💌 Proposal sent at: <span id="yesGeneratedTime"></span><br>
-      💖 Yes accepted at: <span id="yesClickedTime"></span>
+      😻 Yes accepted at: <span id="yesClickedTime"></span>
     </div>
 
     <button class="btn btn-primary" onclick="createNewLink()">Create Another Love Story</button>
@@ -590,11 +556,13 @@
   <!-- No Modal -->
   <div class="modal" id="noModal">
     <div class="modal-content">
-      <h2>💔 You said No...</h2>
+      <h2>😾 You said No...</h2>
+      <div style="width:100%; overflow:hidden; border-radius:16px;">
+  <img src="proposal.jpg" style="width:100%; height:auto;" />
+</div>
+
+
       <p>But love deserves a second chance! Here's what it'll cost to change my mind:</p>
-      
-      <!-- <img id="yesResultImage" class="couple-image" alt="Celebration Image"> -->
-      <div id="noModalImageContainer"></div>
 
       <div class="gap-message">
         Pay via GPay to convince you! 💰
@@ -616,7 +584,7 @@
       </div>
 
       <div class="timestamp">
-        💔 No clicked at: <span id="noClickedTime"></span>
+        😾 No clicked at: <span id="noClickedTime"></span>
       </div>
 
       <div class="payment-buttons">
@@ -628,138 +596,57 @@
 </div>
 
 <script>
-  // Global variables
   let generatedTime, yesClickedTime, noClickedTime;
-  let firstImageData = null;
-  let secondImageData = null;
   let amount1 = 0;
   let amount2 = 0;
   let noClicked = false;
   let userPhone = '';
 
-  // Initialize image uploads
-  document.getElementById('imageUploadContainer1').addEventListener('click', function() {
-    document.getElementById('imageInput1').click();
-  });
-
-  document.getElementById('imageUploadContainer2').addEventListener('click', function() {
-    document.getElementById('imageInput2').click();
-  });
-
-  document.getElementById('imageInput1').addEventListener('change', function(e) {
-    handleImageUpload(e, 'uploadedImagePreview1', 'first');
-  });
-
-  document.getElementById('imageInput2').addEventListener('change', function(e) {
-    handleImageUpload(e, 'uploadedImagePreview2', 'second');
-  });
-
-  // Handle image upload function
-  function handleImageUpload(e, previewId, type) {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    // Check file size (max 2MB)
-    if (file.size > 2 * 1024 * 1024) {
-      alert('File size should be less than 2MB');
-      return;
-    }
-    
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      if (type === 'first') {
-        firstImageData = event.target.result;
-      } else if (type === 'second') {
-        secondImageData = event.target.result;
-      }
-      document.getElementById(previewId).src = event.target.result;
-      document.getElementById(previewId).style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
-
-  // Update amount displays
-  document.getElementById('amount1').addEventListener('input', function() {
-    const enteredAmount = parseInt(this.value) || 0;
-    amount1 = enteredAmount;
-    document.getElementById('amountDisplay1').textContent = '₹' + enteredAmount.toLocaleString();
-    document.getElementById('amountDisplay1').classList.remove('hidden');
-  });
-
-  document.getElementById('amount2').addEventListener('input', function() {
-    const enteredAmount = parseInt(this.value) || 0;
-    amount2 = enteredAmount;
-    document.getElementById('amountDisplay2').textContent = '₹' + enteredAmount.toLocaleString();
-    document.getElementById('amountDisplay2').classList.remove('hidden');
-  });
-
-  // Validate phone number
   function validatePhoneNumber(phone) {
     const phoneRegex = /^[6-9]\d{9}$/;
     return phoneRegex.test(phone);
   }
 
-  // Generate the proposal link
   function generateLink() {
     const yourName = document.getElementById('yourName').value.trim();
     const valentineName = document.getElementById('valentineName').value.trim();
     const phone = document.getElementById('phoneNumber').value.trim();
-    
+    amount1 = parseInt(document.getElementById('amount1').value) || 0;
+    amount2 = parseInt(document.getElementById('amount2').value) || 0;
+
     if (!yourName || !valentineName) {
       alert('Please enter both names!');
       return;
     }
-    
-    if (!phone) {
-      alert('Please enter your phone number for GPay!');
-      return;
-    }
-    
-    if (!validatePhoneNumber(phone)) {
+
+    if (!phone || !validatePhoneNumber(phone)) {
       alert('Please enter a valid Indian phone number (10 digits starting with 6-9)!');
       return;
     }
-    
-    if (!amount1 || amount1 < 1) {
-      alert('Please enter the first amount (for No option)!');
+
+    if (!amount1 || !amount2) {
+      alert('Please enter both amounts!');
       return;
     }
-    
-    if (!amount2 || amount2 < 1) {
-      alert('Please enter the second amount (for Yes option)!');
-      return;
-    }
-    
-    if (!firstImageData) {
-      alert('Please upload a cute couple image!');
-      return;
-    }
-    
-    userPhone = phone;
-    
-    // Store data in localStorage
+
+    localStorage.clear(); // clear old data
     localStorage.setItem('valentineData', JSON.stringify({
       from: yourName,
       to: valentineName,
       phone: phone,
       amount1: amount1,
-      amount2: amount2,
-      firstImage: firstImageData,
-      secondImage: secondImageData
+      amount2: amount2
     }));
-    
-    // Generate a unique link
+
     const baseUrl = window.location.href.split('?')[0];
-    const link = `${baseUrl}?from=${encodeURIComponent(yourName)}&to=${encodeURIComponent(valentineName)}`;
-    
+    const link = `${baseUrl}?from=${encodeURIComponent(yourName)}&to=${encodeURIComponent(valentineName)}&phone=${phone}&a1=${amount1}&a2=${amount2}`;
+
     document.getElementById('generatedLink').textContent = link;
     document.getElementById('linkSection').classList.remove('hidden');
-    
-    // Record generation time
+
     generatedTime = new Date();
   }
 
-  // Copy link to clipboard
   function copyLink() {
     const linkText = document.getElementById('generatedLink').textContent;
     navigator.clipboard.writeText(linkText).then(() => {
@@ -767,86 +654,50 @@
     });
   }
 
-  // Open the proposal page
   function openProposal() {
     document.getElementById('generatorPage').classList.add('hidden');
     document.getElementById('proposalPage').classList.remove('hidden');
-    
-    // Load data from localStorage
+
     const data = JSON.parse(localStorage.getItem('valentineData'));
     if (data) {
-      document.getElementById('proposalQuestion').textContent = `${data.to}, will you be my Valentine?`;
+      document.getElementById('proposalQuestion').textContent = `${data.to}, do you mew my Valentine? 😻`;
       amount1 = data.amount1 || 0;
       amount2 = data.amount2 || 0;
       userPhone = data.phone || '';
-      
-      // Display first uploaded image (couple image)
-      const imageContainer = document.getElementById('proposalImageContainer');
-      if (data.firstImage) {
-        imageContainer.innerHTML = `<img src="${data.firstImage}" class="couple-image" alt="Our Love Story">`;
-      }
     }
-    
-    // Show the hint after a delay
+
     setTimeout(() => {
       document.getElementById('noHint').classList.remove('hidden');
     }, 2000);
   }
 
-  // Handle Yes response
   function handleYes() {
     yesClickedTime = new Date();
-    
-    // Get stored data
     const data = JSON.parse(localStorage.getItem('valentineData'));
-    
-    // Switch to Yes result page
+
     document.getElementById('proposalPage').classList.add('hidden');
     document.getElementById('yesResultPage').classList.remove('hidden');
-    
-    // Set times
+
     document.getElementById('yesGeneratedTime').textContent = generatedTime ? generatedTime.toLocaleString() : new Date().toLocaleString();
     document.getElementById('yesClickedTime').textContent = yesClickedTime.toLocaleString();
-    
-    // Display second image if available
-    if (data && data.secondImage) {
-      document.getElementById('yesResultImage').src = data.secondImage;
-      document.getElementById('yesResultImage').style.display = 'block';
-    }
-    
-    // Generate bill for Yes response (using amount2)
+
     generateYesBill();
   }
 
-  // Handle No response
   function handleNo() {
     noClicked = true;
     noClickedTime = new Date();
     document.getElementById('noClickedTime').textContent = noClickedTime.toLocaleString();
-    
-    // Disable the No button to prevent multiple clicks
+
     document.getElementById('noButton').disabled = true;
     document.getElementById('noButton').style.opacity = '0.5';
-    document.getElementById('noButton').innerHTML = 'Already Clicked 💔';
-    
-    // Get stored data and show the uploaded image in modal
-    const data = JSON.parse(localStorage.getItem('valentineData'));
-    const imageContainer = document.getElementById('noModalImageContainer');
-    if (data && data.firstImage) {
-      imageContainer.innerHTML = `<img src="${data.secondImage}" class="couple-image" alt="Our Love Story">`;
-    }
-    
-    // Generate bill for No response (using amount1)
+    document.getElementById('noButton').innerHTML = 'Already Clicked 😾';
+
     generateNoBill();
-    
-    // Show modal
     document.getElementById('noModal').style.display = 'flex';
-    
-    // Add beforeunload event to prevent accidental refresh
     window.addEventListener('beforeunload', preventRefresh);
   }
 
-  // Prevent refresh when No is clicked
   function preventRefresh(e) {
     if (noClicked) {
       e.preventDefault();
@@ -855,7 +706,6 @@
     }
   }
 
-  // Generate bill items for Yes response based on amount2
   function generateYesBill() {
     const billItems = [
       { name: "Romantic Candlelight Dinner", percentage: 0.25 },
@@ -865,10 +715,10 @@
       { name: "Celebration Cake", percentage: 0.1 },
       { name: "Memory Photo Album", percentage: 0.1 }
     ];
-    
+
     let total = 0;
     let billHTML = '';
-    
+
     billItems.forEach(item => {
       const itemAmount = Math.round(amount2 * item.percentage);
       total += itemAmount;
@@ -879,12 +729,11 @@
         </div>
       `;
     });
-    
+
     document.getElementById('yesBillItems').innerHTML = billHTML;
     document.getElementById('yesTotal').textContent = total.toLocaleString();
   }
 
-  // Generate bill items for No response based on amount1
   function generateNoBill() {
     const billItems = [
       { name: "Apology Flowers", percentage: 0.2 },
@@ -892,12 +741,12 @@
       { name: "Sweet Treats", percentage: 0.1 },
       { name: "Romantic Card", percentage: 0.05 },
       { name: "Promise Gift", percentage: 0.3 },
-      { name: " Dinner", percentage: 0.2 }
+      { name: "Dinner Date", percentage: 0.2 }
     ];
-    
+
     let total = 0;
     let billHTML = '';
-    
+
     billItems.forEach(item => {
       const itemAmount = Math.round(amount1 * item.percentage);
       total += itemAmount;
@@ -908,131 +757,97 @@
         </div>
       `;
     });
-    
+
     document.getElementById('noBillItems').innerHTML = billHTML;
     document.getElementById('noTotal').textContent = total.toLocaleString();
   }
 
-  // Open GPay function
   function openGPay(type) {
     const data = JSON.parse(localStorage.getItem('valentineData'));
     if (!data || !userPhone) {
       alert('Payment information not found. Please create a new link.');
       return;
     }
-    
+
     const amount = type === 'yes' ? amount2 : amount1;
-    const message = type === 'yes' 
+    const message = type === 'yes'
       ? `Valentine's Celebration for ${data.to} from ${data.from}`
       : `Convince Me Gift for ${data.to} from ${data.from}`;
-    
-    // Create UPI ID (using the phone number provided)
+
     const upiId = `${userPhone}@okbizaxis`;
-    
-    // Create GPay/UPI URL
+
     const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(data.from)}&am=${amount}&tn=${encodeURIComponent(message)}&cu=INR`;
-    
-    // Try to open GPay
     window.open(gpayUrl, '_blank');
-    
-    // Fallback to regular UPI link
+
     setTimeout(() => {
       const fallbackUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(data.from)}&am=${amount}&tn=${encodeURIComponent(message)}&cu=INR`;
       window.open(fallbackUrl, '_blank');
     }, 300);
   }
 
-  // Close the No modal
   function closeModal() {
     document.getElementById('noModal').style.display = 'none';
   }
 
-  // Try again after No
   function tryAgain() {
     closeModal();
-    
-    // Re-enable No button
     document.getElementById('noButton').disabled = false;
     document.getElementById('noButton').style.opacity = '1';
-    document.getElementById('noButton').innerHTML = 'No 😔 Maybe Later';
-    
-    // Remove refresh prevention
+    document.getElementById('noButton').innerHTML = 'No 😾 Maybe Later';
+
     noClicked = false;
     window.removeEventListener('beforeunload', preventRefresh);
   }
 
-  // Create a new link
   function createNewLink() {
-    // Clear form
     document.getElementById('yourName').value = '';
     document.getElementById('valentineName').value = '';
     document.getElementById('phoneNumber').value = '';
     document.getElementById('amount1').value = '';
     document.getElementById('amount2').value = '';
-    document.getElementById('uploadedImagePreview1').src = '';
-    document.getElementById('uploadedImagePreview1').style.display = 'none';
-    document.getElementById('uploadedImagePreview2').src = '';
-    document.getElementById('uploadedImagePreview2').style.display = 'none';
-    document.getElementById('amountDisplay1').classList.add('hidden');
-    document.getElementById('amountDisplay2').classList.add('hidden');
-    
-    firstImageData = null;
-    secondImageData = null;
+
     amount1 = 0;
     amount2 = 0;
     userPhone = '';
-    
-    // Show generator page
+
     document.getElementById('yesResultPage').classList.add('hidden');
     document.getElementById('proposalPage').classList.add('hidden');
     document.getElementById('generatorPage').classList.remove('hidden');
     document.getElementById('linkSection').classList.add('hidden');
-    
-    // Remove refresh prevention
+
     noClicked = false;
     window.removeEventListener('beforeunload', preventRefresh);
+    localStorage.clear();
   }
 
-  // Check if page was opened with query parameters
-  window.onload = function() {
+  window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const from = urlParams.get('from');
     const to = urlParams.get('to');
-    
+    const phone = urlParams.get('phone');
+    const a1 = urlParams.get('a1');
+    const a2 = urlParams.get('a2');
+
     if (from && to) {
-      // Directly open proposal page if parameters exist
       document.getElementById('generatorPage').classList.add('hidden');
       document.getElementById('proposalPage').classList.remove('hidden');
-      
-      document.getElementById('proposalQuestion').textContent = `${to}, will you be my Valentine?`;
-      
-      // Check if there's data in localStorage
-      const data = JSON.parse(localStorage.getItem('valentineData'));
-      if (data) {
-        amount1 = data.amount1 || 0;
-        amount2 = data.amount2 || 0;
-        userPhone = data.phone || '';
-        
-        // Display first uploaded image
-        if (data.firstImage) {
-          const imageContainer = document.getElementById('proposalImageContainer');
-          imageContainer.innerHTML = `<img src="${data.firstImage}" class="couple-image" alt="Our Love Story">`;
-        }
-      } else {
-        // If no localStorage data, create minimal data from URL parameters
-        localStorage.setItem('valentineData', JSON.stringify({
-          from: from,
-          to: to,
-          phone: '',
-          amount1: 0,
-          amount2: 0
-        }));
-      }
-      
-      // Set generation time
+
+      document.getElementById('proposalQuestion').textContent = `${to}, do you mew my Valentine? 😻`;
+
+      amount1 = parseInt(a1) || 0;
+      amount2 = parseInt(a2) || 0;
+      userPhone = phone || '';
+
+      localStorage.setItem('valentineData', JSON.stringify({
+        from: from,
+        to: to,
+        phone: phone,
+        amount1: amount1,
+        amount2: amount2
+      }));
+
       generatedTime = new Date();
-      
-      // Show the hint after a delay
+
       setTimeout(() => {
         document.getElementById('noHint').classList.remove('hidden');
       }, 2000);
